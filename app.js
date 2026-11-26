@@ -3,7 +3,7 @@ import {RoomEnvironment} from './vendor/jsm/environments/RoomEnvironment.js';
 const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
 const canvas = document.getElementById('gl');
 const renderer = new THREE.WebGLRenderer({canvas, antialias:true, alpha:true, powerPreference:'high-performance'});
-renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
+renderer.setPixelRatio(Math.min(devicePixelRatio, 1.25));
 renderer.outputColorSpace = THREE.SRGBColorSpace;
 renderer.toneMapping = THREE.ACESFilmicToneMapping;
 renderer.toneMappingExposure = 1.08;
@@ -179,57 +179,58 @@ function kf(s,keys){ if(s<=keys[0][0])return keys[0].slice(1); for(let i=1;i<key
 
 // rod: [s, x,y,z, rx,ry,rz, scale]
 const ROD=[
-  [0,   0,-8,-6, 3.0,0,.28, 1],
-  [2.2,-6,-4,-4, 3.0,0,-.24, 1.8],
-  [2.85,-6.1,-1.15,2.2, 3.05,0.06,-.24, 2.25],
-  [3.4,-6.1,-1.12,2.2, 3.05,0.06,-.24, 2.3],
-  [4.0,-0.3,-.28,-2.2, 0.14,0,0, 1.0],
-  [4.65,-0.3,-.28,-2.2, 0.14,0,0, 1.0],
-  [4.9, 0,14,-3, 0,0,0, .9]
+  [1.9, 0, 9, -4, .10,0,.05, 1.0],
+  [2.3, 0, 3.2, -3.2, .10,0,.02, 1.12],
+  [2.62, 0, -0.95, -2.5, .10,0,-.26, 1.33],
+  [2.75, 0, -0.42, -2.6, .10,0,-.21, 1.26],
+  [3.0, -0.3,-.75,-2.2, .14,0,-.19, 1.22],
+  [3.65,-0.3,-.75,-2.2, .14,0,-.23, 1.22],
+  [3.9, 0, 14,-3, 0,0,0, .9]
 ];
 const ROD2K=[
-  [0,   24,-2.65,-2.2, .14,Math.PI,0, 1.0],
-  [3.7, 24,-2.65,-2.2, .14,Math.PI,0, 1.0],
-  [4.0, 16.4,-2.65,-2.2, .14,Math.PI,0, 1.0],
-  [4.65,16.4,-2.65,-2.2, .14,Math.PI,0, 1.0],
-  [4.95,24,-2.65,-2.2, .14,Math.PI,0, 1.0]
+  [2.7, 24,-2.65,-2.2, .14,Math.PI,0, 1.0],
+  [3.0, 16.4,-2.65,-2.2, .14,Math.PI,0, 1.0],
+  [3.65,16.4,-2.65,-2.2, .14,Math.PI,0, 1.0],
+  [3.9, 24,-2.65,-2.2, .14,Math.PI,0, 1.0]
 ];
 const CAMERA=[
   [0,   0,12,32],
-  [2.6, 0,12,32],
-  [4.0, 0,12,32],
-  [4.8, 0,12,32],
-  [5.0, 0,12,28],
-  [6.1, 0,12,28],
-  [6.5, 0,12,32],
-  [12,  0,12,32]
+  [3.8, 0,12,32],
+  [4.0, 0,12,28],
+  [5.1, 0,12,28],
+  [5.5, 0,12,32],
+  [11,  0,12,32]
 ];
 const SEAT=[
-  [4.65, 10,-0.85,-1.2, 0.06,0,0.08, .72],
-  [4.95,  0,-0.85,-1.2, 0.06,0,0.08, .72],
-  [6.1,   0,-0.85,-1.2, 0.06,0,0.08, .72],
-  [6.45,-10,-0.85,-1.2, 0.06,0,0.08, .72]
+  [3.65, 10,-0.85,-1.2, 0.06,0,0.08, .72],
+  [3.95,  0,-0.85,-1.2, 0.06,0,0.08, .72],
+  [5.1,   0,-0.85,-1.2, 0.06,0,0.08, .72],
+  [5.45,-10,-0.85,-1.2, 0.06,0,0.08, .72]
 ];
 const LURE=[
   [0,   .48,2.45,.7, .12,0,.15],
   [.8,  .32,1.95,.7, .12,0,.15],
-  [6.55,1.05,12,0,   .08,0,.38],
-  [6.95,1.05,1.2,.7, .08,0,.38],
-  [7.6, 1.05,1.0,.7, .08,0,.38],
-  [8.2, 0.72,0.35,.7,.08,.03,.38],
-  [9.0, 0.85,-0.15,.7,.06,.04,.38],
-  [9.8, 0.25,-2.8,.7,.06,.06,.38],
-  [10.5,0,-7.5,.7,   .06,.08,.38]
+  [5.55,1.05,12,0,   .08,0,.38],
+  [5.95,1.05,1.2,.7, .08,0,.38],
+  [6.6, 1.05,1.0,.7, .08,0,.38],
+  [7.2, 0.72,0.35,.7,.08,.03,.38],
+  [8.0, 0.85,-0.15,.7,.06,.04,.38],
+  [8.8, 0.25,-2.8,.7,.06,.06,.38],
+  [9.5, 0,-7.5,.7,   .06,.08,.38]
 ];
 
 const cur={s:0}; let tgt=0;
+// pause loop video off-screen; honor reduced motion
+const rodvid=document.querySelector('.rodvid');
+if(rodvid){new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting){rodvid.play().catch(()=>{})}else{rodvid.pause()}})},{threshold:.05}).observe(rodvid);
+if(matchMedia('(prefers-reduced-motion: reduce)').matches){rodvid.removeAttribute('autoplay');rodvid.pause();}}
 function readScroll(){tgt=(scrollY-2*innerHeight)/innerHeight}
 addEventListener('scroll',readScroll,{passive:true});
 function resize(){const w=innerWidth,h=innerHeight;renderer.setSize(w,h,false);cam.aspect=w/h;cam.updateProjectionMatrix();}
 addEventListener('resize',resize);resize();
 const navEl=document.querySelector('nav');
-const LIGHT=new Set([1,2,3,4,5,6,10,12]);
-function navTheme(s){navEl.classList.toggle('light', LIGHT.has(Math.round(Math.min(s,12))));}
+const LIGHT=new Set([1,2,3,4,5,9,10,11,12,13]);
+function navTheme(s){navEl.classList.toggle('light', LIGHT.has(Math.round(Math.min(s,13))));}
 const q=new URLSearchParams(location.search);
 if(q.has('s')){scrollTo(0,(+q.get('s')+2)*innerHeight);}
 readScroll();cur.s=tgt;
@@ -250,48 +251,48 @@ function frame(){
 
   // Rod & Rod2 visibility & material blend (navy+logo in Sky -> brushed titanium in Precision)
   const r=kf(s,ROD);
-  rod.visible = s>2.3 && s<4.85;
+  rod.visible = s>1.95 && s<3.85;
   rod.position.set(r[0]*k, r[1], r[2]);
   rod.rotation.set(r[3], r[4], r[5]);
   rod.scale.setScalar(r[6]*(wide?1:.76));
-  if(!reduce && s<4.85) rod.position.y += Math.sin(t*.8)*.03;
 
-  const precBlend = ss(Math.max(0, Math.min(1, (s - 3.55) / .35)));
+  const precBlend = ss(Math.max(0, Math.min(1, (s - 2.55) / .35)));
   blankMat.color.copy(C_NAVY).lerp(C_SILVER, precBlend);
   blankMat.metalness = THREE.MathUtils.lerp(.55, .86, precBlend);
   wrapMat.color.copy(C_WRAP_BLUE).lerp(C_WRAP_SILV, precBlend);
   logoMesh.visible = precBlend < 0.65;
 
   const r2=kf(s,ROD2K);
-  rod2.visible = s>3.72 && s<4.88;
+  rod2.visible = s>2.88 && s<3.85;
   rod2.position.set(r2[0]*k, r2[1], r2[2]);
   rod2.rotation.set(r2[3], r2[4], r2[5]);
   rod2.scale.setScalar(r2[6]*(wide?1:.76));
 
   // Grip Macro Seat
   const st=kf(s,SEAT);
-  seat.visible = s>4.68 && s<6.42;
+  seat.visible = s>3.68 && s<5.42;
   seat.position.set(st[0]*k, st[1], st[2]);
   seat.rotation.set(st[3], st[4], st[5]);
   seat.scale.setScalar(st[6]*(wide?1:.88));
 
   // Lure (hero + underwater)
   const l=kf(s,LURE);
-  lure.visible = (s>=0&&s<.9) || (s>6.6 && s<10.5);
+  lure.visible = (s>=0&&s<.9) || (s>5.6 && s<9.5);
   lure.position.set(l[0]*k, l[1], l[2]);
   lure.rotation.set(0, (reduce?0:t*.12)+l[4], l[3]);
   lure.scale.setScalar(l[5]);
-  line.visible = s<7.4 || s>8.4;
-  hookGrp.visible = s>6.5;
+  line.visible = s<6.4 || s>7.4;
+  hookGrp.visible = s>5.5;
 
   // Bubbles
-  const bo = tgt>=10.5 ? 0 : ((s>=0&&s<1.6) ? Math.max(.35,Math.min(1,(s+.3)/.6))*(1-Math.max(0,(s-1.2)/.4)) : (s>6.6&&s<10.4?.72:(s>11.6?.65:0)));
+  const bo = tgt>=9.5 ? 0 : ((s>=0&&s<1.6) ? Math.max(.35,Math.min(1,(s+.3)/.6))*(1-Math.max(0,(s-1.2)/.4)) : (s>5.6&&s<9.4?.72:(s>10.6?.65:0)));
   bubbles.material.opacity = bo*.85; bubbles.visible = bo>.01;
   if(!reduce){
     const a=pg.attributes.position;
     for(let i=0;i<N;i++){let y=a.getY(i)+.018+Math.sin(t+seed[i])*.003;if(y>8)y=-8;a.setY(i,y);}
     a.needsUpdate=true;
   }
-  renderer.render(scene,cam);
+  const anyVis = rod.visible||rod2.visible||seat.visible||lure.visible||bubbles.visible;
+  if(anyVis) renderer.render(scene,cam);
 }
 frame();
