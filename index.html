@@ -45,69 +45,36 @@ background:repeating-linear-gradient(105deg,transparent 0 60px,rgba(255,255,255,
 @keyframes b{50%{transform:translateY(6px)}}@media (prefers-reduced-motion:reduce){.hint{animation:none}}
 
 
-.cast{background:#eaf4fc}
-.cast .rodvid{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
-.cast .veil{position:absolute;inset:0;z-index:1;pointer-events:none;background:linear-gradient(180deg,rgba(225,243,254,.55) 0%,rgba(242,249,255,.10) 30%,rgba(230,244,253,.06) 70%,rgba(190,228,250,.55) 100%)}
 
-.sky{background:#e8dcf0}
-.sky .ph{background-image:url('assets/photo/sky.jpg');background-position:44% 40%;transform:scale(1.12);filter:brightness(1.18) contrast(.92) saturate(.88)}
-.sky .veil{position:absolute;inset:0;z-index:1;background:linear-gradient(180deg,rgba(228,200,236,.58) 0%,rgba(248,224,238,.28) 46%,rgba(255,255,255,.04) 76%,rgba(48,204,245,.58) 100%)}
 
-.white{background:var(--paper)}
-.white>.c>h2{position:absolute;left:6vw;top:11%;font-weight:300;font-size:clamp(28px,6.8vw,62px);line-height:1.05;letter-spacing:.04em;text-transform:uppercase}
 .btn{display:inline-block;background:var(--cyan);color:#fff;font-size:10px;letter-spacing:.2em;padding:11px 20px;border-radius:4px;text-decoration:none;position:absolute;box-shadow:0 4px 14px rgba(25,181,224,.28)}
-.small{position:absolute;font-size:11px;line-height:1.6;max-width:240px;color:#4a6585}
 
-.grip{background:linear-gradient(180deg,#eceff7,#f4f7fa)}
-.grip .ph{display:none}
-.grip .veil{position:absolute;inset:0;z-index:1;background:rgba(244,247,250,.06)}
 
-.depth{background:radial-gradient(65% 18% at 74% 3%,rgba(255,255,255,.52),rgba(170,245,255,.22) 48%,transparent 75%),linear-gradient(180deg,#48d6f4 0%,#26c5f5 28%,#18b0ef 56%,#1188dc 82%,#0a4ca8 100%);height:300vh}
+.depth{background:radial-gradient(65% 18% at 74% 3%,rgba(255,255,255,.52),rgba(170,245,255,.22) 48%,transparent 75%),linear-gradient(180deg,#48d6f4 0%,#26c5f5 28%,#18b0ef 56%,#1188dc 82%,#0a4ca8 100%);height:160vh}
 .depth .rays{opacity:.14}
 .depth .lab{position:absolute;left:6vw;color:#fff;font-size:10px;letter-spacing:.28em}
 .depth .lab h3{font-weight:300;font-size:clamp(26px,7vw,58px);letter-spacing:.06em;line-height:.98;margin-top:6px;color:transparent;-webkit-text-fill-color:transparent;-webkit-text-stroke:1.3px #fff}
 .depth .lab p{margin-top:8px;font-size:11px;letter-spacing:.04em;max-width:205px;opacity:.92;line-height:1.6}
 .depth .lab em{display:block;font-style:normal;font-size:10px;letter-spacing:.24em;color:#eaf7ff;margin-top:6px;font-weight:400;max-width:220px;line-height:1.4}
-.depth .side{position:absolute;left:6vw;top:92vh;max-width:210px;color:#eaf7ff;font-size:10px;letter-spacing:.14em;line-height:1.6;opacity:.82}
-
-.bench{background:#e7ecf2}
-.bench .ph{background-image:url('assets/photo/bench.jpg');background-size:cover;background-position:48% 58%}
-.bench .veil{position:absolute;inset:0;z-index:1;background:rgba(244,247,250,.06)}
-.band{position:absolute;left:0;right:0;bottom:0;top:auto;height:24%;background:rgba(25,181,224,.95);display:flex;align-items:center;justify-content:space-between;gap:16px;padding:0 6vw;z-index:2}
-.band h2{position:static;max-width:none;font-weight:300;letter-spacing:.05em;font-size:clamp(24px,6vw,68px);line-height:1;text-transform:uppercase;color:transparent;-webkit-text-stroke:1.4px #fff;flex:1 1 auto}
-.band .small{position:static;flex:0 1 42%;max-width:240px;color:#f3fbff;font-size:10px;line-height:1.5;text-shadow:none}
-
-.ask{background:var(--paper)}
-.ask h2{position:absolute;font-weight:300;font-size:clamp(28px,7.2vw,76px);line-height:1.02;left:6vw;top:14%;max-width:44%;text-transform:uppercase;letter-spacing:.03em}
-.ask .sub{position:absolute;left:6vw;top:44%;max-width:42%;font-size:11px;line-height:1.5;color:#5a7491}
-.ask form{position:absolute;right:6vw;top:16%;width:42%;max-width:300px;display:grid;gap:12px}
-.ask input,.ask textarea{border:0;border-bottom:1px solid #9bb0c8;background:none;padding:9px 0;font:inherit;font-size:11px;color:var(--ink);width:100%}
-.ask button:disabled{opacity:.85}.ask button{background:var(--cyan);color:#fff;border:0;border-radius:4px;padding:11px;letter-spacing:.18em;font-size:10px;cursor:default}
-.footx{font-weight:300;font-size:min(11.8vw,190px);letter-spacing:.09em;line-height:1;color:transparent;-webkit-text-stroke:1.2px var(--ink)}
+.depth .side{position:absolute;left:6vw;top:36vh;max-width:210px;color:#eaf7ff;font-size:10px;letter-spacing:.14em;line-height:1.6;opacity:.82}
 
 
-@media(max-width:700px){
-  .hero h1.hollow{top:36%;font-size:11.6vw;letter-spacing:.08em;text-indent:.08em}
-  .hero p{top:calc(36% + 11.6vw*.95 + 12px);font-size:10px;letter-spacing:.22em}
-  .white>.c>h2{max-width:88%;font-size:clamp(26px,6.8vw,40px)}
-  .small{max-width:210px}
-  .ask h2{top:14%;font-size:clamp(26px,6.8vw,38px);max-width:44%}
-  .ask .sub{top:34%;max-width:42%;font-size:10px}
-  .ask form{top:16%;right:6vw;left:auto;width:42%}
-  .band{height:23%;padding:0 5vw}
-  .band h2{font-size:clamp(22px,5.6vw,30px)}
-  .band .small{font-size:9.5px;flex:0 1 46%}
-}
 
-.final{background:var(--paper)}
-.final .c{display:flex;flex-direction:column;justify-content:center;align-items:center}
+
+@media(max-width:700px){.hero h1.hollow{top:36%;font-size:11.6vw;letter-spacing:.08em;text-indent:.08em}.hero p{top:calc(36% + 11.6vw*.95 + 12px);font-size:10px;letter-spacing:.22em}}
+
+.final{background:var(--paper);height:auto;min-height:0}
+.final .c{display:flex;flex-direction:column;justify-content:center;align-items:center;padding:8vh 6vw 6vh}
 .final .foot{font-weight:300;font-size:min(12.5vw,190px);letter-spacing:.09em;line-height:1;color:transparent;-webkit-text-stroke:1.2px var(--ink);text-align:center}
 .final .branches{margin-top:4vh;display:grid;gap:6px;text-align:center;font-size:11px;color:#4a6585;line-height:1.7}
 .final .branches .bt{font-size:10px;letter-spacing:.2em;color:#8ba0b8;margin-bottom:4px}
 .final .rights{margin-top:3vh;font-size:10px;letter-spacing:.14em;color:#5a7491;text-align:center}
 .final .credits{margin-top:2vh;font-size:9px;letter-spacing:.05em;color:#8ba0b8;line-height:1.7;text-align:center;padding:0 8vw}
 .final .credits a{color:#5a7491}
+.final .fcontact{margin-top:3vh;font-size:11px;color:var(--ink);text-align:center;line-height:2}
+.final .fcontact a{color:var(--blue);text-decoration:none}
 #heroCv{position:absolute;inset:0;width:100%;height:100%;z-index:0;filter:saturate(1.12) contrast(1.04)}
+.hero-prog{position:absolute;top:0;left:0;height:3px;background:#7ce7ff;z-index:5;width:0}
 .hero{overflow:visible}
 .shop{background:var(--paper);height:auto;min-height:100vh;min-height:100dvh;overflow:visible}
 .shop .wrap{padding:11vh 6vw 9vh}
@@ -117,27 +84,18 @@ background:repeating-linear-gradient(105deg,transparent 0 60px,rgba(255,255,255,
 .card b{font-weight:500;font-size:15px;color:var(--ink);line-height:1.55}
 .card span{font-size:11px;color:#5a7491;line-height:1.7;margin-top:7px;flex:1}
 .card i{font-style:normal;font-size:10px;letter-spacing:.1em;color:var(--blue);margin-top:9px}
-.contact{position:absolute;right:6vw;top:15%;width:46%;max-width:330px;font-size:11.5px;line-height:2.05;color:var(--ink)}
-.contact a{color:var(--blue);text-decoration:none}
-.contact .b{font-weight:500}
-@media(max-width:700px){.contact{top:44%;left:6vw;right:6vw;width:auto;font-size:10.5px;line-height:1.95}.ask .sub{display:none}}
 @media(prefers-reduced-motion:reduce){.hint{animation:none}}
 </style></head><body>
 <nav><b>TAWEENA</b><span class="ar">سنانير &nbsp; طعوم &nbsp; ماكينات</span></nav>
 <canvas id="gl"></canvas>
 
-<section class="hero" data-s="0" style="height:300vh"><div class="stick"><div class="ph"></div><canvas id="heroCv"></canvas><div class="veil"></div><div class="rays"></div><div class="c"><h1 class="hollow w">TAWEENA</h1><p class="ar">كل اللي تحتاجه لرحلة صيد مظبوطة</p></div><div class="hint ar">اكتشف العدّة</div></div></section>
+<section class="hero" data-s="0" style="height:300vh"><div class="stick"><div class="ph"></div><div class="hero-prog" id="heroProg"></div><canvas id="heroCv"></canvas><div class="veil"></div><div class="rays"></div><div class="c"><h1 class="hollow w">TAWEENA</h1><p class="ar">كل اللي تحتاجه لرحلة صيد مظبوطة</p></div><div class="hint ar">اكتشف العدّة</div></div></section>
 
-<section class="cast"><video class="rodvid" src="assets/video/rod_loop.mp4" autoplay muted loop playsinline preload="metadata"></video><div class="veil"></div></section>
-<section class="sky"><div class="ph"></div><div class="veil"></div></section>
-<section class="white"><div class="c"><h2 class="hollow d ar">الدقة<br>في كل<br>تفصيلة</h2><a class="btn ar" style="left:6vw;bottom:14%" href="#shop">شوف المنتجات</a><p class="small ar" style="left:6vw;top:34%">سنانير وماكينات وطعوم وإكسسوارات أصلية، بنختارها بعناية من ماركات موثوقة.</p></div></section>
-<section class="grip"><div class="ph"></div><div class="veil"></div></section>
-<section class="white"><div class="c"><h2 class="hollow d ar">كل تفصيلة<br>معمولة<br>بحساب.</h2><p class="small ar" style="right:6vw;bottom:14%">قاعدة ماكينة متشغّلة بدقة على المخرطة، وحلقات سلك متشكّلة وملفوفة يدويًا، مع الاهتمام بوزن كل جزء قبل التجميع.</p></div></section>
-<section class="depth" data-depth><div class="rays"></div><div class="c" style="height:300vh">
- <div class="lab" style="top:18vh">01<h3 class="ar">المياه السطحية</h3><em class="ar">حركة وصوت يجذبوا السمك</em><p class="ar">طعوم سطحية وضحلة، خفيفة وسريعة، بحركة وصوت يلفتوا الانتباه.</p></div>
+<section class="depth" data-depth><div class="rays"></div><div class="c" style="height:160vh">
+ <div class="lab" style="top:8vh">01<h3 class="ar">المياه السطحية</h3><em class="ar">حركة وصوت يجذبوا السمك</em><p class="ar">طعوم سطحية وضحلة، خفيفة وسريعة، بحركة وصوت يلفتوا الانتباه.</p></div>
  <div class="side ar">ثلاثة أعماق، واختيارات مختلفة لكل طريقة صيد. اختار الطُعم والوزن المناسبين عشان تحافظ على مساره في المياه.</div>
- <div class="lab" style="top:130vh">02<h3 class="ar">المياه المتوسطة</h3><em class="ar">ثبات وتحكم في العمق</em><p class="ar">طعوم معلّقة تحافظ على مسارها وسط حركة المياه والتيار.</p></div>
- <div class="lab" style="top:262vh">03<h3 class="ar">المياه العميقة</h3><em class="ar">للأعماق والسمك الكبير</em><p class="ar">طعوم وعدّة بأوزان أكبر، للمناطق الأعمق واستهداف الأسماك الكبيرة.</p></div></div></section>
+ <div class="lab" style="top:62vh">02<h3 class="ar">المياه المتوسطة</h3><em class="ar">ثبات وتحكم في العمق</em><p class="ar">طعوم معلّقة تحافظ على مسارها وسط حركة المياه والتيار.</p></div>
+ <div class="lab" style="top:118vh">03<h3 class="ar">المياه العميقة</h3><em class="ar">للأعماق والسمك الكبير</em><p class="ar">طعوم وعدّة بأوزان أكبر، للمناطق الأعمق واستهداف الأسماك الكبيرة.</p></div></div></section>
 <section class="shop" id="shop"><div class="wrap"><h2 class="ar">اختار عدّتك</h2><p class="ar" style="font-size:11px;color:#5a7491;margin:-3vh 0 4.5vh;letter-spacing:.04em">تشكيلة من منتجاتنا متوفرة في فروعنا الثلاثة. اسألنا على واتساب عن السعر والمقاس والتوافر.</p><div class="grid">
 <div class="card ar"><div class="pic"><img loading="lazy" src="assets/products/monster.webp" alt="طعوم TAWEENA Monster"></div><b>طعوم TAWEENA Monster</b><span>مينو غاطس 60مم، 6.5جم. جودة بريميوم.</span><i>طعوم</i></div>
 <div class="card ar"><div class="pic"><img loading="lazy" src="assets/products/jigging.webp" alt="جيجات Jigging Pro"></div><b>جيجات Jigging Pro</b><span>ساردين سلايدر 20/40جم، فلاش 14/25جم، سترايكر 40/80جم — بخطاطيف BKK.</span><i>جيج</i></div>
@@ -153,15 +111,14 @@ background:repeating-linear-gradient(105deg,transparent 0 60px,rgba(255,255,255,
 <div class="card ar"><div class="pic"><img loading="lazy" src="assets/products/makadi.webp" alt="تشكيلات MAKADI سلك"></div><b>تشكيلات MAKADI سلك</b><span>سلك ستانلس قوي وخطاطيف حادة، مصنوعة يدويًا للأسماك المفترسة.</span><i>تشكيلات</i></div>
 <div class="card ar"><div class="pic"><img loading="lazy" src="assets/products/bait.webp" alt="طُعم حي"></div><b>طُعم حي</b><span>جمبري حي وسطل طعم حي — حسب التوفر.</span><i>طُعم</i></div>
 </div></div></section>
-<section class="bench"><div class="ph"></div><div class="veil"></div><div class="band"><h2 class="hollow w ar">شغل يدوي..<br>سلك ورا سلك.</h2><p class="small ar">تشكيلات مكادي مصنوعة يدويًا من سلك ستانلس قوي، بخطاطيف حادة وتجهيزات مناسبة لصيد الأسماك المفترسة بالطُعم الحي أو الميت.</p></div></section>
-<section class="ask" id="ask"><div class="c"><h2 class="hollow d ar">محتار<br>تختار<br>عدّتك؟</h2><p class="sub ar">قولنا بتصطاد إيه وفين، وإحنا نساعدك تختار العدّة المناسبة.</p><div class="contact ar"><span class="b">مدينة نصر:</span> 6 نجاتي سراج، خلف السراج مول — 01226575854<br><span class="b">6 أكتوبر:</span> مول الإسراء بلازا، المحور المركزي — 01283620001<br><span class="b">التجمع:</span> فرعنا الثالث — التفاصيل على فيسبوك<br>واتساب: <a href="https://wa.me/201227347737?text=%D8%A3%D9%87%D9%84%D9%8B%D8%A7+TAWEENA%D8%8C+%D9%85%D8%AD%D8%AA%D8%A7%D8%AC+%D8%A3%D8%B3%D8%AA%D9%81%D8%B3%D8%B1+%D8%B9%D9%86+%D8%B9%D8%AF%D8%A9+%D8%B5%D9%8A%D8%AF.%0A%D9%86%D9%88%D8%B9+%D8%A7%D9%84%D8%B5%D9%8A%D8%AF%3A%0A%D9%85%D9%83%D8%A7%D9%86+%D8%A7%D9%84%D8%B5%D9%8A%D8%AF%3A%0A%D8%A7%D9%84%D9%85%D9%86%D8%AA%D8%AC+%D8%A7%D9%84%D9%85%D8%B7%D9%84%D9%88%D8%A8%3A%0A%D9%85%D9%85%D9%83%D9%86+%D8%A3%D8%B9%D8%B1%D9%81+%D8%A7%D9%84%D8%B3%D8%B9%D8%B1+%D9%88%D8%A7%D9%84%D8%AA%D9%88%D9%81%D8%B1+%D9%81%D9%8A+%D8%A3%D9%82%D8%B1%D8%A8+%D9%81%D8%B1%D8%B9%D8%9F" rel="noopener">01227347737</a> · <a href="mailto:info@taweena.com">info@taweena.com</a> · <a href="https://www.facebook.com/Taweenafishing" rel="noopener">فيسبوك</a><br><a class="btn ar" style="position:static;display:inline-block;margin-top:12px" href="https://wa.me/201227347737?text=%D8%A3%D9%87%D9%84%D9%8B%D8%A7+TAWEENA%D8%8C+%D9%85%D8%AD%D8%AA%D8%A7%D8%AC+%D8%A3%D8%B3%D8%AA%D9%81%D8%B3%D8%B1+%D8%B9%D9%86+%D8%B9%D8%AF%D8%A9+%D8%B5%D9%8A%D8%AF.%0A%D9%86%D9%88%D8%B9+%D8%A7%D9%84%D8%B5%D9%8A%D8%AF%3A%0A%D9%85%D9%83%D8%A7%D9%86+%D8%A7%D9%84%D8%B5%D9%8A%D8%AF%3A%0A%D8%A7%D9%84%D9%85%D9%86%D8%AA%D8%AC+%D8%A7%D9%84%D9%85%D8%B7%D9%84%D9%88%D8%A8%3A%0A%D9%85%D9%85%D9%83%D9%86+%D8%A3%D8%B9%D8%B1%D9%81+%D8%A7%D9%84%D8%B3%D8%B9%D8%B1+%D9%88%D8%A7%D9%84%D8%AA%D9%88%D9%81%D8%B1+%D9%81%D9%8A+%D8%A3%D9%82%D8%B1%D8%A8+%D9%81%D8%B1%D8%B9%D8%9F" rel="noopener">اسألنا على واتساب</a></div></div></section>
 
-<section class="final"><div class="c"><div class="foot">TAWEENA</div><div class="branches ar"><span class="bt">زورونا في فروعنا</span><span><b>مدينة نصر:</b> 6 نجاتي سراج، خلف السراج مول</span><span><b>6 أكتوبر:</b> مول الإسراء بلازا، المحور المركزي</span><span><b>القاهرة الجديدة – التجمع</b></span></div><p class="rights ar">© 2026 TAWEENA Fishing Tackles — كل الحقوق محفوظة</p><p class="credits">Media: Taweena Fishing Tackles promo + product photos from the business's public Facebook page · Hero still: "Megalops atlanticus" by Mister.Tee, <a href="https://creativecommons.org/licenses/by/2.0/" rel="noopener">CC BY 2.0</a></p></div></section>
+<section class="final"><div class="c"><div class="foot">TAWEENA</div><div class="branches ar"><span class="bt">زورونا في فروعنا</span><span><b>مدينة نصر:</b> 6 نجاتي سراج، خلف السراج مول</span><span><b>6 أكتوبر:</b> مول الإسراء بلازا، المحور المركزي</span><span><b>القاهرة الجديدة – التجمع</b></span></div><div class="fcontact ar">واتساب: <a href="https://wa.me/201227347737?text=%D8%A3%D9%87%D9%84%D9%8B%D8%A7+TAWEENA%D8%8C+%D9%85%D8%AD%D8%AA%D8%A7%D8%AC+%D8%A3%D8%B3%D8%AA%D9%81%D8%B3%D8%B1+%D8%B9%D9%86+%D8%B9%D8%AF%D8%A9+%D8%B5%D9%8A%D8%AF.%0A%D9%86%D9%88%D8%B9+%D8%A7%D9%84%D8%B5%D9%8A%D8%AF%3A%0A%D9%85%D9%83%D8%A7%D9%86+%D8%A7%D9%84%D8%B5%D9%8A%D8%AF%3A%0A%D8%A7%D9%84%D9%85%D9%86%D8%AA%D8%AC+%D8%A7%D9%84%D9%85%D8%B7%D9%84%D9%88%D8%A8%3A%0A%D9%85%D9%85%D9%83%D9%86+%D8%A3%D8%B9%D8%B1%D9%81+%D8%A7%D9%84%D8%B3%D8%B9%D8%B1+%D9%88%D8%A7%D9%84%D8%AA%D9%88%D9%81%D8%B1+%D9%81%D9%8A+%D8%A3%D9%82%D8%B1%D8%A8+%D9%81%D8%B1%D8%B9%D8%9F" rel="noopener">01227347737</a> · <a href="mailto:info@taweena.com">info@taweena.com</a> · <a href="https://www.facebook.com/Taweenafishing" rel="noopener">فيسبوك</a><br><a class="btn ar" style="position:static;display:inline-block;margin-top:10px" href="https://wa.me/201227347737?text=%D8%A3%D9%87%D9%84%D9%8B%D8%A7+TAWEENA%D8%8C+%D9%85%D8%AD%D8%AA%D8%A7%D8%AC+%D8%A3%D8%B3%D8%AA%D9%81%D8%B3%D8%B1+%D8%B9%D9%86+%D8%B9%D8%AF%D8%A9+%D8%B5%D9%8A%D8%AF.%0A%D9%86%D9%88%D8%B9+%D8%A7%D9%84%D8%B5%D9%8A%D8%AF%3A%0A%D9%85%D9%83%D8%A7%D9%86+%D8%A7%D9%84%D8%B5%D9%8A%D8%AF%3A%0A%D8%A7%D9%84%D9%85%D9%86%D8%AA%D8%AC+%D8%A7%D9%84%D9%85%D8%B7%D9%84%D9%88%D8%A8%3A%0A%D9%85%D9%85%D9%83%D9%86+%D8%A3%D8%B9%D8%B1%D9%81+%D8%A7%D9%84%D8%B3%D8%B9%D8%B1+%D9%88%D8%A7%D9%84%D8%AA%D9%88%D9%81%D8%B1+%D9%81%D9%8A+%D8%A3%D9%82%D8%B1%D8%A8+%D9%81%D8%B1%D8%B9%D8%9F" rel="noopener">اسألنا على واتساب</a></div><p class="rights ar">© 2026 TAWEENA Fishing Tackles — كل الحقوق محفوظة</p><p class="credits">Media: Taweena Fishing Tackles promo + product photos from the business's public Facebook page · Hero still: "Megalops atlanticus" by Mister.Tee, <a href="https://creativecommons.org/licenses/by/2.0/" rel="noopener">CC BY 2.0</a></p></div></section>
 <script type="importmap">{"imports":{"three":"./vendor/three.module.min.js"}}</script>
 <style>.hero .stick{position:sticky;top:0;height:100vh;height:100dvh;overflow:hidden}</style>
 <script type="module" src="app.js"></script>
 <script>
-const NF=207,PRE=30,cv=document.getElementById('heroCv'),cx=cv.getContext('2d');
+const NF=104,PRE=20,cv=document.getElementById('heroCv'),cx=cv.getContext('2d');
+const ttl=document.querySelector('.hero .c'),hnt=document.querySelector('.hero .hint'),prog=document.getElementById('heroProg');
 const imgs=new Array(NF);
 function loadOne(i){return new Promise(r=>{const im=new Image();im.onload=()=>{imgs[i]=im;r()};im.onerror=()=>r();im.src='assets/frames/frame_'+String(i+1).padStart(4,'0')+'.webp';});}
 (async()=>{const first=[];for(let i=0;i<PRE;i++)first.push(loadOne(i));await Promise.all(first);
@@ -172,12 +129,12 @@ let curF=-1;
 (function draw(){requestAnimationFrame(draw);
  if(scrollY>3*innerHeight){return;}
  const p=Math.max(0,Math.min(1,scrollY/(2*innerHeight)));
+ if(prog)prog.style.width=(p*100)+'%';
+ const fade=Math.max(0,1-p*2.6);
+ if(ttl)ttl.style.opacity=fade; if(hnt)hnt.style.opacity=fade;
  let idx=Math.min(NF-1,Math.floor(p*NF));
  if(!imgs[idx]){let found=-1;for(let d=1;d<NF;d++){if(idx-d>=0&&imgs[idx-d]){found=idx-d;break}if(idx+d<NF&&imgs[idx+d]){found=idx+d;break}}
   if(found<0)return;idx=found;}
- const fade=Math.max(0,1-p*2.6);
- const ttl=document.querySelector('.hero .c'),hnt=document.querySelector('.hero .hint');
- if(ttl)ttl.style.opacity=fade; if(hnt)hnt.style.opacity=fade;
  if(idx===curF)return;curF=idx;
  const im=imgs[idx],cw=cv.width,chh=cv.height,ir=im.width/im.height,cr=cw/chh;
  let dw,dh;if(ir>cr){dh=chh;dw=chh*ir;}else{dw=cw;dh=cw/ir;}
