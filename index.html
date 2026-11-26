@@ -1,0 +1,173 @@
+<!doctype html>
+<html lang="ar"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>TAWEENA | تاوينا لمعدات الصيد</title>
+<style>
+:root{--cyan:#19b5e0;--blue:#1493e0;--deep:#0a3d91;--ink:#12293f;--paper:#f4f7fa}
+*{box-sizing:border-box;margin:0}
+html{scroll-behavior:auto}
+body{font-family:"Helvetica Neue",Arial,"Noto Sans Arabic",sans-serif;color:var(--ink);background:var(--blue);overflow-x:clip}
+.ar{font-family:"Helvetica Neue",Arial,"Noto Sans Arabic",sans-serif;letter-spacing:0!important;text-indent:0!important}
+canvas#gl{position:fixed;inset:0;width:100vw;height:100vh;height:100dvh;z-index:1;pointer-events:none}
+section{position:relative;height:100vh;height:100dvh;overflow:hidden}
+.c{position:relative;z-index:2;height:100%;padding:0 6vw}
+.ph{position:absolute;inset:0;z-index:0;background-size:cover;background-position:center;background-repeat:no-repeat}
+video.phv{position:absolute;inset:0;z-index:0;width:100%;height:100%;object-fit:cover;pointer-events:none}
+nav{position:fixed;z-index:5;top:0;left:0;right:0;display:flex;justify-content:space-between;align-items:center;padding:16px 6vw;font-size:11px;letter-spacing:.22em;color:#fff;text-shadow:0 1px 10px rgba(3,20,50,.45);transition:color .3s}
+nav.light{color:var(--ink);text-shadow:none}
+nav:before{content:"";position:absolute;left:0;right:0;top:0;height:68px;background:linear-gradient(rgba(4,20,45,.26),transparent);z-index:-1;pointer-events:none}
+nav.light:before{background:none}
+nav b{font-weight:400;letter-spacing:.36em}
+nav span{opacity:.82}
+
+/* signature hollow-outline display type */
+.hollow{color:transparent;-webkit-text-fill-color:transparent;-webkit-text-stroke:1.25px currentColor}
+.hollow.w{-webkit-text-stroke-color:#fff}
+.hollow.d{-webkit-text-stroke-color:var(--ink)}
+
+/* light-ray shafts over underwater scenes */
+.rays{position:absolute;inset:-20% -30%;z-index:1;pointer-events:none;mix-blend-mode:screen;opacity:.38;
+background:repeating-linear-gradient(105deg,transparent 0 60px,rgba(255,255,255,.20) 90px,transparent 150px);
+-webkit-mask-image:linear-gradient(180deg,#000 0%,transparent 70%);mask-image:linear-gradient(180deg,#000 0%,transparent 70%)}
+
+.hero .ph{background-image:url('assets/photo/hero_poster.jpg');background-size:cover;background-position:center}
+.hero video.phv{object-position:34% 46%;filter:saturate(1.34) contrast(1.42) brightness(.90)}
+.hero .veil{position:absolute;inset:0;z-index:1;background:radial-gradient(95% 55% at 14% 22%,rgba(90,238,255,.55),transparent 58%),radial-gradient(110% 90% at 50% 45%,transparent 42%,rgba(10,130,218,.58) 88%),linear-gradient(180deg,rgba(22,188,244,.20) 0%,rgba(10,132,218,.04) 40%,rgba(4,56,142,.62) 100%)}
+.hero h1{position:absolute;top:36%;left:0;right:0;text-align:center;font-weight:200;font-size:min(11.8vw,148px);letter-spacing:.085em;text-indent:.085em;line-height:1;color:transparent;-webkit-text-fill-color:transparent;-webkit-text-stroke:1.4px #fff;text-shadow:0 2px 24px rgba(0,35,90,.22)}
+.hero p{position:absolute;top:calc(36% + min(11.8vw,148px)*.95 + 14px);width:100%;left:0;text-align:center;color:rgba(242,250,255,.94);font-size:11px;letter-spacing:.26em;text-shadow:0 1px 12px rgba(0,35,85,.55)}
+.hint{position:absolute;bottom:28px;left:0;right:0;text-align:center;color:#fff;font-size:10px;letter-spacing:.3em;z-index:3;animation:b 2s infinite}
+@keyframes b{50%{transform:translateY(6px)}}
+
+.splash{background:#7ad8f7}
+.splash video.phv{object-position:50% 80%;transform:scale(1.42);transform-origin:50% 82%;filter:brightness(1.52) contrast(.86) saturate(1.32) hue-rotate(-6deg)}
+.splash .ph{background-image:url('assets/photo/splash.jpg');background-size:cover;background-position:50% 80%;transform:scale(1.42);transform-origin:50% 82%;filter:brightness(1.52) contrast(.86) saturate(1.32) hue-rotate(-6deg)}
+.splash .veil{position:absolute;inset:0;z-index:1;background:radial-gradient(85% 60% at 48% 66%,rgba(255,255,255,.52),transparent 62%),linear-gradient(180deg,rgba(155,230,255,.54) 0%,rgba(65,198,245,.20) 55%,rgba(30,170,238,.36) 100%)}
+
+.cast{background:#eaf4fc}
+.cast .ph{background-image:url('assets/photo/cast_bright.jpg');background-size:185% auto;background-position:80% 84%;transform:rotate(7deg) scale(1.32);transform-origin:82% 72%;filter:brightness(1.38) contrast(1.06) saturate(.70)}
+.cast .veil{position:absolute;inset:0;z-index:1;background:radial-gradient(110% 70% at 88% 12%,rgba(128,204,250,.56),transparent 60%),linear-gradient(180deg,rgba(225,243,254,.48) 0%,rgba(242,249,255,.26) 52%,rgba(230,244,253,.14) 84%,rgba(165,220,248,.92) 92%,rgba(145,212,245,.96) 100%)}
+
+.sky{background:#e8dcf0}
+.sky .ph{background-image:url('assets/photo/sky.jpg');background-position:44% 40%;transform:scale(1.12);filter:brightness(1.18) contrast(.92) saturate(.88)}
+.sky .veil{position:absolute;inset:0;z-index:1;background:linear-gradient(180deg,rgba(228,200,236,.58) 0%,rgba(248,224,238,.28) 46%,rgba(255,255,255,.04) 76%,rgba(48,204,245,.58) 100%)}
+
+.white{background:var(--paper)}
+.white>.c>h2{position:absolute;left:6vw;top:11%;font-weight:200;font-size:clamp(28px,6.8vw,62px);line-height:1.05;letter-spacing:.04em;text-transform:uppercase}
+.btn{display:inline-block;background:var(--cyan);color:#fff;font-size:10px;letter-spacing:.2em;padding:11px 20px;border-radius:4px;text-decoration:none;position:absolute;box-shadow:0 4px 14px rgba(25,181,224,.28)}
+.small{position:absolute;font-size:11px;line-height:1.6;max-width:240px;color:#4a6585}
+
+.grip{background:linear-gradient(180deg,#eceff7,#f4f7fa)}
+.grip .ph{display:none}
+.grip .veil{position:absolute;inset:0;z-index:1;background:rgba(244,247,250,.06)}
+
+.depth{background:radial-gradient(65% 18% at 74% 3%,rgba(255,255,255,.52),rgba(170,245,255,.22) 48%,transparent 75%),linear-gradient(180deg,#48d6f4 0%,#26c5f5 28%,#18b0ef 56%,#1188dc 82%,#0a4ca8 100%);height:300vh}
+.depth .rays{opacity:.14}
+.depth .lab{position:absolute;left:6vw;color:#fff;font-size:10px;letter-spacing:.28em}
+.depth .lab h3{font-weight:200;font-size:clamp(26px,7vw,58px);letter-spacing:.06em;line-height:.98;margin-top:6px;color:transparent;-webkit-text-fill-color:transparent;-webkit-text-stroke:1.3px #fff}
+.depth .lab p{margin-top:8px;font-size:11px;letter-spacing:.04em;max-width:205px;opacity:.92;line-height:1.6}
+.depth .lab em{display:block;font-style:normal;font-size:10px;letter-spacing:.24em;color:#eaf7ff;margin-top:6px;font-weight:400;max-width:220px;line-height:1.4}
+.depth .side{position:absolute;left:6vw;top:92vh;max-width:210px;color:#eaf7ff;font-size:10px;letter-spacing:.14em;line-height:1.6;opacity:.82}
+
+.bench{background:#e7ecf2}
+.bench .ph{background-image:url('assets/photo/bench.jpg');background-size:cover;background-position:48% 58%}
+.bench .veil{position:absolute;inset:0;z-index:1;background:rgba(244,247,250,.06)}
+.band{position:absolute;left:0;right:0;bottom:0;top:auto;height:24%;background:rgba(25,181,224,.95);display:flex;align-items:center;justify-content:space-between;gap:16px;padding:0 6vw;z-index:2}
+.band h2{position:static;max-width:none;font-weight:200;letter-spacing:.05em;font-size:clamp(24px,6vw,68px);line-height:1;text-transform:uppercase;color:transparent;-webkit-text-stroke:1.4px #fff;flex:1 1 auto}
+.band .small{position:static;flex:0 1 42%;max-width:240px;color:#f3fbff;font-size:10px;line-height:1.5;text-shadow:none}
+
+.ask{background:var(--paper)}
+.ask h2{position:absolute;font-weight:200;font-size:clamp(28px,7.2vw,76px);line-height:1.02;left:6vw;top:14%;max-width:44%;text-transform:uppercase;letter-spacing:.03em}
+.ask .sub{position:absolute;left:6vw;top:44%;max-width:42%;font-size:11px;line-height:1.5;color:#5a7491}
+.ask form{position:absolute;right:6vw;top:16%;width:42%;max-width:300px;display:grid;gap:12px}
+.ask input,.ask textarea{border:0;border-bottom:1px solid #9bb0c8;background:none;padding:9px 0;font:inherit;font-size:11px;color:var(--ink);width:100%}
+.ask button:disabled{opacity:.85}.ask button{background:var(--cyan);color:#fff;border:0;border-radius:4px;padding:11px;letter-spacing:.18em;font-size:10px;cursor:default}
+.foot{position:absolute;bottom:2.5%;left:6vw;font-weight:200;font-size:min(11.8vw,190px);letter-spacing:.09em;line-height:1;color:transparent;-webkit-text-stroke:1.2px var(--ink)}
+.credits{position:absolute;bottom:2.2%;left:6vw;right:6vw;z-index:2;font-size:9px;letter-spacing:.06em;color:rgba(255,255,255,.75);line-height:1.6;text-shadow:0 1px 8px rgba(3,20,50,.5)}
+.credits a{color:rgba(255,255,255,.9)}
+
+.end{background:#099ee8}
+.end .ph{inset:auto;left:50%;top:50%;width:1120px;height:1120px;background-image:url('assets/photo/end.jpg');background-size:cover;background-position:22% 48%;transform:translate(-50%,-50%) rotate(-54deg);filter:contrast(1.95) brightness(.78) saturate(1.5) hue-rotate(18deg)}
+.end .veil{position:absolute;inset:0;z-index:1;background:radial-gradient(85% 60% at 18% 66%,rgba(28,225,255,.32),transparent 58%),linear-gradient(180deg,rgba(0,122,240,.22) 0%,rgba(0,175,255,.05) 55%,rgba(0,100,220,.30) 100%)}
+
+@media(max-width:700px){
+  .hero h1.hollow{top:36%;font-size:11.6vw;letter-spacing:.08em;text-indent:.08em}
+  .hero p{top:calc(36% + 11.6vw*.95 + 12px);font-size:10px;letter-spacing:.22em}
+  .white>.c>h2{max-width:88%;font-size:clamp(26px,6.8vw,40px)}
+  .small{max-width:210px}
+  .ask h2{top:14%;font-size:clamp(26px,6.8vw,38px);max-width:44%}
+  .ask .sub{top:34%;max-width:42%;font-size:10px}
+  .ask form{top:16%;right:6vw;left:auto;width:42%}
+  .band{height:23%;padding:0 5vw}
+  .band h2{font-size:clamp(22px,5.6vw,30px)}
+  .band .small{font-size:9.5px;flex:0 1 46%}
+}
+
+#heroCv{position:absolute;inset:0;width:100%;height:100%;z-index:0;filter:saturate(1.12) contrast(1.04)}
+.hero{overflow:visible}
+.shop{background:var(--paper);height:auto;min-height:100vh;min-height:100dvh;overflow:visible}
+.shop .wrap{padding:11vh 6vw 9vh}
+.shop h2{font-weight:200;font-size:clamp(28px,6.8vw,62px);line-height:1.08;letter-spacing:.04em;color:transparent;-webkit-text-stroke:1.25px var(--ink);margin-bottom:4.5vh}
+.shop .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(148px,1fr));gap:13px}
+.card{background:#fff;border:1px solid #e2e9f0;border-radius:10px;padding:0 0 13px;min-height:190px;display:flex;flex-direction:column;overflow:hidden;box-shadow:0 2px 10px rgba(20,80,140,.05)}.card .pic{height:76px;background:linear-gradient(135deg,#eaf7fd,#d3ecf9);display:flex;align-items:center;justify-content:center;margin-bottom:10px}.card .pic svg{width:40px;height:40px}.card b,.card span,.card i{padding:0 13px}
+.card b{font-weight:500;font-size:13px;color:var(--ink);line-height:1.55}
+.card span{font-size:10.5px;color:#5a7491;line-height:1.65;margin-top:7px;flex:1}
+.card i{font-style:normal;font-size:10px;letter-spacing:.1em;color:var(--blue);margin-top:9px}
+.contact{position:absolute;right:6vw;top:15%;width:46%;max-width:330px;font-size:11.5px;line-height:2.05;color:var(--ink)}
+.contact a{color:var(--blue);text-decoration:none}
+.contact .b{font-weight:500}
+@media(max-width:700px){.contact{top:44%;left:6vw;right:6vw;width:auto;font-size:10.5px;line-height:1.95}.ask .sub{display:none}}
+@media(prefers-reduced-motion:reduce){.hint{animation:none}}
+</style></head><body>
+<nav><b>TAWEENA</b><span class="ar">سنانير &nbsp; طعوم &nbsp; مكن</span></nav>
+<canvas id="gl"></canvas>
+
+<section class="hero" data-s="0" style="height:300vh"><div class="stick"><div class="ph"></div><canvas id="heroCv"></canvas><div class="veil"></div><div class="rays"></div><div class="c"><h1 class="hollow w">TAWEENA</h1><p class="ar">عدّة صيد أصلية للمياه المفتوحة</p></div><div class="hint ar">مرّر</div></div></section>
+<section class="splash"><div class="ph"></div><video class="phv" autoplay muted loop playsinline preload="auto" src="assets/video/splash.mp4"></video><div class="veil"></div></section>
+<section class="cast"><div class="ph"></div><div class="veil"></div></section>
+<section class="sky"><div class="ph"></div><div class="veil"></div></section>
+<section class="white"><div class="c"><h2 class="hollow d ar">الدقة<br>في المكان<br>الصحيح</h2><a class="btn ar" style="left:6vw;bottom:14%" href="#shop">شاهد المنتجات</a><p class="small ar" style="left:6vw;top:34%">سنانير ومكن وطعوم وإكسسوارات أصلية، مختارة قطعة قطعة من ماركات موثوقة.</p></div></section>
+<section class="grip"><div class="ph"></div><div class="veil"></div></section>
+<section class="white"><div class="c"><h2 class="hollow d ar">مقعد مشغول بدقة،<br>وحلقات<br>ملفوفة يدويًا.</h2><p class="small ar" style="right:6vw;bottom:14%">مقعد ماكينة مشغول بمخرطة. كل جزء يُوزن قبل أن يُلف.</p></div></section>
+<section class="depth" data-depth><div class="rays"></div><div class="c" style="height:300vh">
+ <div class="lab" style="top:18vh">01<h3 class="ar">السطح</h3><em class="ar">حيث ما زال الضوء يصل</em><p class="ar">طعوم سطحية وضحلة. خفيفة، سريعة، وصوتها عالٍ.</p></div>
+ <div class="side ar">ثلاثة أعماق. بلانك واحد. كل طُعم مضبوط ليحافظ على مساره في عمود المياه.</div>
+ <div class="lab" style="top:130vh">02<h3 class="ar">المياه المتوسطة</h3><p class="ar">طعوم معلّقة تحافظ على خطها وسط التيار.</p></div>
+ <div class="lab" style="top:262vh">03<h3 class="ar">المياه الأعمق</h3><p class="ar">عدة أثقل للأماكن التي تنتظر فيها الأسماك الكبيرة.</p></div>
+</div></section>
+<section class="shop" id="shop"><div class="wrap"><h2 class="ar">المجموعة</h2><p class="ar" style="font-size:11px;color:#5a7491;margin:-3vh 0 4.5vh;letter-spacing:.04em">متوفر في فروعنا الثلاثة — اسأل على واتساب عن السعر والمقاس.</p><div class="grid">
+<div class="card ar"><div class="pic"><svg viewBox="0 0 48 48" fill="none" stroke="#1493e0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 24c6-7 16-7 22 0-6 7-16 7-22 0z"/><path d="M28 24l8-5v10l-8-5z"/><circle cx="12" cy="22" r="1.4" fill="#1493e0"/><path d="M36 29c0 4-2 6-5 6"/></svg></div><b>طعوم TAWEENA Monster</b><span>مينو غاطس 60مم، 6.5جم. جودة بريميوم.</span><i>طعوم</i></div>
+<div class="card ar"><div class="pic"><svg viewBox="0 0 48 48" fill="none" stroke="#1493e0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 40C18 28 28 16 40 8"/><path d="M40 8c-2 10-8 18-16 24"/><circle cx="20" cy="34" r="3"/><path d="M14 40h8"/></svg></div><b>عدة صيد أطفال كاملة</b><span>سنارة يد 4م خفيفة + خيط ورصاص وخطاف وعوامة وفوسفور ليلي.</span><i>120 ج.م</i></div>
+<div class="card ar"><div class="pic"><svg viewBox="0 0 48 48" fill="none" stroke="#1493e0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M24 6l8 12H16l8-12z"/><path d="M18 18v10c0 4 2 8 6 8s6-4 6-8V18"/><path d="M20 36v6M24 38v6M28 36v6"/></svg></div><b>طعوم حبار Holiday Egi</b><span>ألوان متعددة في عبوات جاهزة.</span><i>طعوم</i></div>
+<div class="card ar"><div class="pic"><svg viewBox="0 0 48 48" fill="none" stroke="#1493e0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M24 6v8"/><path d="M24 14c6 0 9 4 9 9s-3 9-9 9-9-4-9-9c0-3 1-5 3-7"/><path d="M24 32v6c0 3-2 5-5 5"/></svg></div><b>جيجات Jigging Pro</b><span>ساردين سلايدر 20/40جم، فلاش 14/25جم، سترايكر 40/80جم — بخطاطيف BKK.</span><i>جيج</i></div>
+<div class="card ar"><div class="pic"><svg viewBox="0 0 48 48" fill="none" stroke="#1493e0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="8" y="16" width="32" height="18" rx="9"/><path d="M8 25h32"/><circle cx="38" cy="25" r="2"/></svg></div><b>شنط سنانير</b><span>مقاسا 100 و120سم، تحمي العدة من الخدوش والصدمات.</span><i>إكسسوارات</i></div>
+<div class="card ar"><div class="pic"><svg viewBox="0 0 48 48" fill="none" stroke="#1493e0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="8" y="14" width="32" height="24" rx="3"/><path d="M8 22h32M20 14v-3h8v3"/><path d="M16 30h4M28 30h4"/></svg></div><b>كولرات KEEP COLD</b><span>صناعة إماراتية بخبرة أمريكية، مقاسات 10 إلى 70 لتر.</span><i>إكسسوارات</i></div>
+</div></div></section>
+<section class="bench"><div class="ph"></div><div class="veil"></div><div class="band"><h2 class="hollow w ar">مصنوع يدويًا.<br>سلك تلو سلك.</h2><p class="small ar">تشكيلات مكادي اليدوية بسلك ستانلس قوي وخطاطيف حادة، جاهزة للأسماك المفترسة والطعم الحي أو الميت.</p></div></section>
+<section class="ask" id="ask"><div class="c"><h2 class="hollow d ar">اسألنا<br>عن<br>عدّتك.</h2><p class="sub ar">قولنا بتصطاد إيه وفين، ونرشّحلك العدة المناسبة.</p><div class="contact ar"><span class="b">مدينة نصر:</span> 6 نجاتي سراج، خلف السراج مول — 01226575854<br><span class="b">6 أكتوبر:</span> مول الإسراء بلازا، المحور المركزي — 01283620001<br><span class="b">التجمع:</span> فرعنا الثالث — التفاصيل على فيسبوك<br>واتساب: <a href="https://wa.me/201227347737" rel="noopener">01227347737</a> · <a href="mailto:info@taweena.com">info@taweena.com</a> · <a href="https://www.facebook.com/Taweenafishing" rel="noopener">فيسبوك</a><br><a class="btn ar" style="position:static;display:inline-block;margin-top:12px" href="https://wa.me/201227347737" rel="noopener">كلمنا واتساب</a></div><div class="foot">TAWEENA</div></div></section>
+<section class="end"><div class="ph"></div><div class="veil"></div><div class="credits">Hero footage: Taweena Fishing Tackles promo (business's own video) · Photos: "Catch of the Day" by Thomas Leuthard, <a href="https://www.flickr.com/photos/41346951@N05/16740495771" rel="noopener">CC BY 2.0</a> · "Megalops atlanticus" by Mister.Tee, <a href="https://commons.wikimedia.org/wiki/File:Megalops_atlanticus_(5454232020).jpg" rel="noopener">CC BY 2.0</a></div></section>
+<script type="importmap">{"imports":{"three":"./vendor/three.module.min.js"}}</script>
+<style>.hero .stick{position:sticky;top:0;height:100vh;height:100dvh;overflow:hidden}</style>
+<script type="module" src="app.js"></script>
+<script>
+const NF=275,PRE=30,cv=document.getElementById('heroCv'),cx=cv.getContext('2d');
+const imgs=new Array(NF);
+function loadOne(i){return new Promise(r=>{const im=new Image();im.onload=()=>{imgs[i]=im;r()};im.onerror=()=>r();im.src='assets/frames/frame_'+String(i+1).padStart(4,'0')+'.webp';});}
+(async()=>{const first=[];for(let i=0;i<PRE;i++)first.push(loadOne(i));await Promise.all(first);
+ for(let i=PRE;i<NF;i+=4){const b=[];for(let j=i;j<Math.min(i+4,NF);j++)b.push(loadOne(j));await Promise.all(b);}})();
+function size(){const d=Math.min(devicePixelRatio||1,2);cv.width=innerWidth*d;cv.height=innerHeight*d;}
+addEventListener('resize',size);size();
+let curF=-1;
+(function draw(){requestAnimationFrame(draw);
+ const p=Math.max(0,Math.min(1,scrollY/(2*innerHeight)));
+ let idx=Math.min(NF-1,Math.floor(p*NF));
+ if(!imgs[idx]){let found=-1;for(let d=1;d<NF;d++){if(idx-d>=0&&imgs[idx-d]){found=idx-d;break}if(idx+d<NF&&imgs[idx+d]){found=idx+d;break}}
+  if(found<0)return;idx=found;}
+ const fade=Math.max(0,1-p*2.6);
+ const ttl=document.querySelector('.hero .c'),hnt=document.querySelector('.hero .hint');
+ if(ttl)ttl.style.opacity=fade; if(hnt)hnt.style.opacity=fade;
+ if(idx===curF)return;curF=idx;
+ const im=imgs[idx],cw=cv.width,chh=cv.height,ir=im.width/im.height,cr=cw/chh;
+ let dw,dh;if(ir>cr){dh=chh;dw=chh*ir;}else{dw=cw;dh=cw/ir;}
+ cx.drawImage(im,(cw-dw)/2,(chh-dh)/2,dw,dh);})();
+</script>
+</body></html>
